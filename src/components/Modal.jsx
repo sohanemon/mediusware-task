@@ -5,6 +5,7 @@ import Table from "./table";
 export default function Modal({ us }) {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
+  const [isEven, setIsEven] = useState(false);
   useEffect(() => {
     fetchContacts(us);
 
@@ -28,11 +29,15 @@ export default function Modal({ us }) {
         <div className='my-modal-dialog'>
           <div className='my-modal-content'>
             <div className='my-modal-header'>
-              <h5 className='my-modal-title'>Modal title</h5>
+              <h5 className='my-modal-title'> Contacts</h5>
             </div>
             <div className='my-modal-body'>
-              <Table contacts={contacts} />
+              <Table contacts={contacts} isEven={isEven} />
             </div>
+            <label style={{ display: "flex", gap: 5, cursor: "pointer" }}>
+              <input onChange={() => setIsEven((p) => !p)} type='checkbox' />
+              Only Even
+            </label>
             <div className='my-modal-footer'>
               <button
                 onClick={() => navigate(-1)}
