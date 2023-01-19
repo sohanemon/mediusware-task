@@ -1,18 +1,10 @@
 import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Problem2 = () => {
+  const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
-
-  async function fetchContacts(us) {
-    let url;
-    if (us)
-      url =
-        "https://contact.mediusware.com/api/country-contacts/united%20states/";
-    else url = "https://contact.mediusware.com/api/contacts/";
-
-    const res = await fetch(url);
-    const data = await res.json();
-  }
+  const [modal, setModal] = useState(false);
 
   return (
     <div className='container'>
@@ -21,20 +13,22 @@ const Problem2 = () => {
 
         <div className='d-flex justify-content-center gap-3'>
           <button
-            onClick={() => fetchContacts(false)}
+            onClick={() => navigate("/problem-2/all")}
             className='btn btn-lg btn-outline-primary'
             type='button'
           >
             All Contacts
           </button>
           <button
-            onClick={() => fetchContacts(true)}
+            onClick={() => navigate("/problem-2/us")}
             className='btn btn-lg btn-outline-warning'
             type='button'
           >
             US Contacts
           </button>
         </div>
+
+        <Outlet />
       </div>
     </div>
   );
