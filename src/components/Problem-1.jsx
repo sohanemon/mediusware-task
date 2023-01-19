@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 
 const Problem1 = () => {
   const [show, setShow] = useState("all");
@@ -87,12 +87,22 @@ const Problem1 = () => {
               </tr>
             </thead>
             <tbody>
-              {problems.map((problem) => (
-                <tr>
-                  <td>{problem.name}</td>
-                  <td>{problem.status}</td>
-                </tr>
-              ))}
+              {problems.map((problem) => {
+                if (show === "all")
+                  return (
+                    <tr>
+                      <td>{problem.name}</td>
+                      <td>{problem.status}</td>
+                    </tr>
+                  );
+                if (problem.status === show)
+                  return (
+                    <tr>
+                      <td>{problem.name}</td>
+                      <td>{problem.status}</td>
+                    </tr>
+                  );
+              })}
             </tbody>
           </table>
         </div>
