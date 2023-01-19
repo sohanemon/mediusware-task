@@ -13,17 +13,21 @@ const Problem1 = () => {
       name: e.target.name.value,
       status: e.target.status.value,
     };
-    const sortedProblem = [...problems, newProblem].sort(sortProblems);
+    const array = [...problems, newProblem];
+    const sortedProblem = array.sort(sortProblems);
     setProblems(sortedProblem);
   }
   function sortProblems(a, b) {
-    if (a.completed === b.completed) {
+    if (a.status === b.status) {
       return 0;
     }
-    if (a.completed && !b.completed) {
-      return 1;
+    if (a.status === "active") {
+      return -1;
     }
-    return -1;
+    if (a.status === "completed" && b.status !== "active") {
+      return -1;
+    }
+    return 1;
   }
 
   return (
